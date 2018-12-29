@@ -4,7 +4,7 @@
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 BOOL    CALLBACK MyDlgProc(HWND, UINT, WPARAM, LPARAM);
 
-bool iState[10];
+int iState[10] = {-10,-10,-10,-10,-10,-10,-10,-10,-10,-10};
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow)
 {
@@ -82,6 +82,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	static short sCount = 0;
 	iState[0] = 0;
 	static int iWinner;
+	//static TCHAR str2[100];
 	//static bool bIsResultOut = 0;
 
 	// code
@@ -347,7 +348,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			if (str == 'X')
 			{
 				SetDlgItemText(hwnd, PB_9, TEXT("X"));
-				iState[9] = 1;
+			 	iState[9] = 1;
 				str = 'O';
 			}
 			else
@@ -398,7 +399,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			sCount = 0;
 			iWinner = 0;
 			for (int p = 0; p < 11; p++)
-				iState[p] = 0;
+				iState[p] = -10;
 
 			break;
 		case PB_CLOSE:
@@ -407,6 +408,13 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 #pragma endregion
 
 		}
+		//for (int ap = 0; ap < 10; ap++)
+		//{
+		//	wsprintf(str2, TEXT("%s %d "),str2, iState[ap]);
+		//}
+		//MessageBox(hwnd, str2, TEXT("INFO"), MB_OK);
+		//wcscpy_s(str2, TEXT(""));
+		
 #pragma region WINNER
 		switch(iWinner)
 		{
@@ -458,8 +466,8 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			else
 				SetDlgItemText(hwnd, LT_RESULT, TEXT("O is WINNER!"));
 			break;
-		default:
-			break;
+/*		default:
+			break*/;
 		}
 	}
 #pragma endregion
@@ -469,24 +477,84 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 int CheckGame()
 {
-	if (iState[1] == iState[2] == iState[3])
+	//TCHAR str2[100] = TEXT("");
+	//for (int ap = 0; ap < 10; ap++)
+	//{
+	//	wsprintf(str2, TEXT("%s %d "), str2, iState[ap]);
+	//}
+	//MessageBox(NULL, str2, TEXT("CHECK INFO"), MB_OK);
+	//wcscpy_s(str2, TEXT(""));
+	int c1 = iState[1] + iState[2] + iState[3];
+	int c2 = iState[4] + iState[5] + iState[6];
+	int c3 = iState[7] + iState[8] + iState[9];
+	int c4 = iState[1] + iState[4] + iState[7];
+	int c5 = iState[2] + iState[5] + iState[8];
+	int c6 = iState[3] + iState[6] + iState[9];
+	int c7 = iState[1] + iState[5] + iState[9];
+	int c8 = iState[3] + iState[5] + iState[7];
+
+	if(c1 == 3 || c1 == 0)
+	//if ((iState[1] == iState[2] == iState[3]) && (iState[1] != -1) )
+	{ 
+		//wsprintf(str2, TEXT("%d %d %d"), iState[1], iState[2], iState[3]);
+		//MessageBox(NULL, str2, TEXT("return 1"), MB_OK);
 		return(1);
-	else if (iState[4] == iState[5] == iState[6])
+	}
+	if (c2 == 3 || c2 == 0)
+	//else if ((iState[4] == iState[5] == iState[6]) && (iState[4] != -1) )
+	{
+		//wsprintf(str2, TEXT("%d %d %d"), iState[4], iState[5], iState[6]);
+		//MessageBox(NULL, str2, TEXT("return 2"), MB_OK);
 		return(2);
-	else if (iState[7] == iState[8] == iState[9])
+	}
+	else if (c3 == 3 || c3 == 0)
+	//else if ((iState[7] == iState[8] == iState[9]) && (iState[7] != -1) )
+	{
+		//wsprintf(str2, TEXT("%d %d %d"), iState[7], iState[8], iState[9]);
+		//MessageBox(NULL, str2, TEXT("return 3"), MB_OK);
 		return(3);
-	else if (iState[1] == iState[4] == iState[7])
+	}
+	else if (c4 == 3 || c4 == 0)
+	//else if ((iState[1] == iState[4] == iState[7]) && (iState[1] != -1) )
+	{
+		//wsprintf(str2, TEXT("%d %d %d"), iState[1], iState[4], iState[7]);
+		//MessageBox(NULL, str2, TEXT("return 4"), MB_OK);
 		return(4);
-	else if (iState[2] == iState[5] == iState[8])
+	}
+	else if (c5 == 3 || c5 == 0)
+	//else if ((iState[2] == iState[5] == iState[8]) && (iState[2] != -1) )
+	{
+		//wsprintf(str2, TEXT("%d %d %d"), iState[2], iState[5], iState[8]);
+		//MessageBox(NULL, str2, TEXT("return 5"), MB_OK);
 		return(5);
-	else if (iState[3] == iState[6] == iState[9])
+	}
+	else if (c6 == 3 || c6 == 0)
+	//else if ((iState[3] == iState[6] == iState[9]) && (iState[3] != -1) )
+	{
+		//wsprintf(str2, TEXT("%d %d %d"), iState[3], iState[6], iState[9]);
+		//MessageBox(NULL, str2, TEXT("return 6"), MB_OK);
 		return(6);
-	else if (iState[1] == iState[5] == iState[9])
+	}
+	else if (c7 == 3 || c7 == 0)
+	//else if ((iState[1] == iState[5] == iState[9]) && (iState[1] != -1) )
+	{
+		//wsprintf(str2, TEXT("%d %d %d"), iState[1], iState[5], iState[9]);
+		//MessageBox(NULL, str2, TEXT("return 7"), MB_OK);
 		return(7);
-	else if (iState[3] == iState[5] == iState[7])
+	}
+	else if (c8 == 3 || c8 == 0)
+	//else if ((iState[3] == iState[5] == iState[7]) && (iState[3] != -1) )
+	{
+		//wsprintf(str2, TEXT("%d %d %d"), iState[3], iState[5], iState[7]);
+		//MessageBox(NULL, str2, TEXT("return 8"), MB_OK);
 		return(8);
+	}
 	else
+	{
+		//wsprintf(str2, TEXT("nothing matched"));
+		//MessageBox(NULL, str2, TEXT("return 0"), MB_OK);
 		return(0);
+	}
 }
 
 void StopAll(HWND hwnd)
