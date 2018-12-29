@@ -1,7 +1,7 @@
 # Tic-Tac-Toe
 ___
 
-## Simple [Tic-Tac-Toe](https://en.wikipedia.org/wiki/Tic-tac-toe) gameplay implementation using **Win32 SDK**
+### Simple [Tic-Tac-Toe](https://en.wikipedia.org/wiki/Tic-tac-toe) gameplay implementation using _"Win32 SDK"_
 
 
 
@@ -24,9 +24,11 @@ ___
 
 ___
 
-### REQUIRENMETS
+### REQUIRENMETS :
+
 + **Operating System** : WINDOWS OPERATING SYSTEM
   + It might support any Windows Operating System (protected mode) `above Windows NT`
+
 + **Architecture** : X86 ARCHITECTURE (DESKTOP APPLICATION)
   + Application developed on `Windows 10` machine using `Visual Studio 17`for  **x86 architecture (32 bit machines)**
   + It will also run on `X64 architecture machine` (backword compatibility)
