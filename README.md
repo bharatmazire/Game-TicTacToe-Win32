@@ -1,7 +1,7 @@
 # Tic-Tac-Toe
 ___
 
-## This is Simple [Tic-Tac-Toe](https://en.wikipedia.org/wiki/Tic-tac-toe) gameplay implementation using **Win32 SDK**
+## Simple [Tic-Tac-Toe](https://en.wikipedia.org/wiki/Tic-tac-toe) gameplay implementation using **Win32 SDK**
 
 
 
