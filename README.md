@@ -3,8 +3,6 @@ ___
 
 ## This is Simple [Tic-Tac-Toe](https://en.wikipedia.org/wiki/Tic-tac-toe) gameplay using ***Win32 SDK***
 
-___
-___
 
 
 1. Initail Stage
