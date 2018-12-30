@@ -17,7 +17,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 	wndclass.cbSize = sizeof(wndclass);
 	wndclass.cbWndExtra = 0;
 	wndclass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-	wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wndclass.hCursor = LoadCursor(NULL, IDC_HAND);
+//	wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
 //	wndclass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(MY_ICON));
 //	wndclass.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(MY_ICON));
 	wndclass.hIcon = LoadIcon(NULL,IDI_APPLICATION);
@@ -73,7 +74,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
 	// declaration of function
 
-	int CheckGame();
+	int CheckGame(static short);
 	void StopAll(HWND);
 	
 	// declaration of variables
@@ -161,7 +162,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[1] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -186,7 +187,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[2] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -211,7 +212,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[3] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -236,7 +237,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[4] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -261,7 +262,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[5] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -286,7 +287,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[6] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -311,7 +312,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[7] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -336,7 +337,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[8] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -361,7 +362,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			//iState[9] = 1;
 			if (++sCount > 4)
 			{
-				iWinner = CheckGame();
+				iWinner = CheckGame(sCount);
 				if (iWinner)
 				{
 					StopAll(hwnd);
@@ -466,6 +467,9 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			else
 				SetDlgItemText(hwnd, LT_RESULT, TEXT("O is WINNER!"));
 			break;
+		case 9:
+			SetDlgItemText(hwnd, LT_RESULT, TEXT("GAME DRAW"));
+			break;
 /*		default:
 			break*/;
 		}
@@ -475,7 +479,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 }
 
 
-int CheckGame()
+int CheckGame(short sCount)
 {
 	//TCHAR str2[100] = TEXT("");
 	//for (int ap = 0; ap < 10; ap++)
@@ -549,7 +553,11 @@ int CheckGame()
 		//MessageBox(NULL, str2, TEXT("return 8"), MB_OK);
 		return(8);
 	}
-	else
+	else if (sCount == 9)
+	{
+		return(9);
+	}
+	else 
 	{
 		//wsprintf(str2, TEXT("nothing matched"));
 		//MessageBox(NULL, str2, TEXT("return 0"), MB_OK);
