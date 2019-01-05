@@ -27,7 +27,7 @@ ___
 ### REQUIRENMETS :
 
 + **Operating System** : WINDOWS OPERATING SYSTEM
-  + It might support any Windows Operating System (protected mode) `above Windows NT`
+  + It might support any Windows Operating System `above Windows NT`
 
 + **Architecture** : X86 ARCHITECTURE (DESKTOP APPLICATION)
   + Application developed on `Windows 10` machine using `Visual Studio 17`for  **x86 architecture (32 bit machines)**
