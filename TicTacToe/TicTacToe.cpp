@@ -18,9 +18,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLi
 	wndclass.cbWndExtra = 0;
 	wndclass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
 	wndclass.hCursor = LoadCursor(NULL, IDC_HAND);
-//	wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
-//	wndclass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(MY_ICON));
-//	wndclass.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(MY_ICON));
 	wndclass.hIcon = LoadIcon(NULL,IDI_APPLICATION);
 	wndclass.hIconSm = LoadIcon(NULL,IDI_APPLICATION);
 	wndclass.hInstance = hInstance;
@@ -74,15 +71,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
 	// declaration of function
 
-	int CheckGame(static short);
+	int CheckGame(short);
 	void StopAll(HWND);
+	void PlayerTwo(HWND);
+	void ResetAll(HWND);
 	
 	// declaration of variables
 	static HBRUSH hBrush;
-	static char str = 'X';
+	static char str = 'O';
 	static short sCount = 0;
 	iState[0] = 0;
 	static int iWinner;
+	static bool bMode = 0;
+
 	//static TCHAR str2[100];
 	//static bool bIsResultOut = 0;
 
@@ -119,9 +120,6 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CTLCOLORLISTBOX:
 	case WM_CTLCOLORSTATIC:
 	case WM_CTLCOLORMSGBOX:
-		//SetBkColor((HDC)wParam, RGB(255, 255, 255));
-		//SetBkMode((HDC)wParam, RGB(0, 0, 0));
-		//SetTextColor((HDC)wParam, RGB(64, 224, 208));
 		SetBkMode((HDC)wParam, RGB(255, 255, 255));
 		SetTextColor((HDC)wParam, RGB(0, 0, 128));
 
@@ -144,7 +142,30 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 
 		switch (LOWORD(wParam))
 		{
-		
+		case RB_SINGLE:
+			switch (HIWORD(wParam))
+			{
+			case BN_CLICKED:
+				bMode = 1;
+				ResetAll(hwnd);
+				str = 'O';
+				sCount = 0;
+				iWinner = 0;
+				break;
+			}
+			break;
+		case RB_DOUBLE:
+			switch (HIWORD(wParam))
+			{
+			case BN_CLICKED:
+				bMode = 0;
+				ResetAll(hwnd);
+				str = 'O';
+				sCount = 0;
+				iWinner = 0;
+				break;
+			}
+			break;
 		case PB_1:
 			if (str == 'X')
 			{
@@ -166,6 +187,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				if (iWinner)
 				{
 					StopAll(hwnd);
+				}
+			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
 				}
 			}
 			break;
@@ -193,6 +227,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					StopAll(hwnd);
 				}
 			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
+				}
+			}
 			break;
 
 		case PB_3:
@@ -216,6 +263,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				if (iWinner)
 				{
 					StopAll(hwnd);
+				}
+			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
 				}
 			}
 			break;
@@ -243,6 +303,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					StopAll(hwnd);
 				}
 			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
+				}
+			}
 			break;
 
 		case PB_5:
@@ -266,6 +339,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				if (iWinner)
 				{
 					StopAll(hwnd);
+				}
+			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
 				}
 			}
 			break;
@@ -293,6 +379,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					StopAll(hwnd);
 				}
 			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
+				}
+			}
 			break;
 
 		case PB_7:
@@ -316,6 +415,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				if (iWinner)
 				{
 					StopAll(hwnd);
+				}
+			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
 				}
 			}
 			break;
@@ -343,6 +455,19 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					StopAll(hwnd);
 				}
 			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
+				}
+			}
 			break;
 
 		case PB_9:
@@ -368,39 +493,29 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					StopAll(hwnd);
 				}
 			}
+			if (bMode)
+			{
+				PlayerTwo(hwnd);
+				str = 'O';
+				if (++sCount > 4)
+				{
+					iWinner = CheckGame(sCount);
+					if (iWinner)
+					{
+						StopAll(hwnd);
+					}
+				}
+			}
 			break;
 
 #pragma region RESETCLOSE
 		case PB_RESET:
 			// enable all push buttons
-			EnableWindow(GetDlgItem(hwnd, PB_1), TRUE);
-			EnableWindow(GetDlgItem(hwnd, PB_2), TRUE);
-			EnableWindow(GetDlgItem(hwnd, PB_3), TRUE);
-			EnableWindow(GetDlgItem(hwnd, PB_4), TRUE);
-			EnableWindow(GetDlgItem(hwnd, PB_5), TRUE);
-			EnableWindow(GetDlgItem(hwnd, PB_6), TRUE);
-			EnableWindow(GetDlgItem(hwnd, PB_7), TRUE);
-			EnableWindow(GetDlgItem(hwnd, PB_8), TRUE);
-			EnableWindow(GetDlgItem(hwnd, PB_9), TRUE);
-			//ResetAll(hwnd);
+			ResetAll(hwnd);
 			
-			// clear all push buttons
-			SetDlgItemText(hwnd, PB_1, TEXT(""));
-			SetDlgItemText(hwnd, PB_2, TEXT(""));
-			SetDlgItemText(hwnd, PB_3, TEXT(""));
-			SetDlgItemText(hwnd, PB_4, TEXT(""));
-			SetDlgItemText(hwnd, PB_5, TEXT(""));
-			SetDlgItemText(hwnd, PB_6, TEXT(""));
-			SetDlgItemText(hwnd, PB_7, TEXT(""));
-			SetDlgItemText(hwnd, PB_8, TEXT(""));
-			SetDlgItemText(hwnd, PB_9, TEXT(""));
-			SetDlgItemText(hwnd, LT_RESULT, TEXT(""));
-			
-			str = 'X';
+			str = 'O';
 			sCount = 0;
 			iWinner = 0;
-			for (int p = 0; p < 11; p++)
-				iState[p] = -10;
 
 			break;
 		case PB_CLOSE:
@@ -409,13 +524,7 @@ BOOL CALLBACK MyDlgProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 #pragma endregion
 
 		}
-		//for (int ap = 0; ap < 10; ap++)
-		//{
-		//	wsprintf(str2, TEXT("%s %d "),str2, iState[ap]);
-		//}
-		//MessageBox(hwnd, str2, TEXT("INFO"), MB_OK);
-		//wcscpy_s(str2, TEXT(""));
-		
+
 #pragma region WINNER
 		switch(iWinner)
 		{
@@ -565,6 +674,37 @@ int CheckGame(short sCount)
 	}
 }
 
+void ResetAll(HWND hwnd)
+{
+	EnableWindow(GetDlgItem(hwnd, PB_1), TRUE);
+	EnableWindow(GetDlgItem(hwnd, PB_2), TRUE);
+	EnableWindow(GetDlgItem(hwnd, PB_3), TRUE);
+	EnableWindow(GetDlgItem(hwnd, PB_4), TRUE);
+	EnableWindow(GetDlgItem(hwnd, PB_5), TRUE);
+	EnableWindow(GetDlgItem(hwnd, PB_6), TRUE);
+	EnableWindow(GetDlgItem(hwnd, PB_7), TRUE);
+	EnableWindow(GetDlgItem(hwnd, PB_8), TRUE);
+	EnableWindow(GetDlgItem(hwnd, PB_9), TRUE);
+	//ResetAll(hwnd);
+
+	// clear all push buttons
+	SetDlgItemText(hwnd, PB_1, TEXT(""));
+	SetDlgItemText(hwnd, PB_2, TEXT(""));
+	SetDlgItemText(hwnd, PB_3, TEXT(""));
+	SetDlgItemText(hwnd, PB_4, TEXT(""));
+	SetDlgItemText(hwnd, PB_5, TEXT(""));
+	SetDlgItemText(hwnd, PB_6, TEXT(""));
+	SetDlgItemText(hwnd, PB_7, TEXT(""));
+	SetDlgItemText(hwnd, PB_8, TEXT(""));
+	SetDlgItemText(hwnd, PB_9, TEXT(""));
+	SetDlgItemText(hwnd, LT_RESULT, TEXT(""));
+
+	for (int p = 0; p < 11; p++)
+		iState[p] = -10;
+
+}
+
+
 void StopAll(HWND hwnd)
 {
 	EnableWindow(GetDlgItem(hwnd, PB_1), FALSE);
@@ -576,4 +716,59 @@ void StopAll(HWND hwnd)
 	EnableWindow(GetDlgItem(hwnd, PB_7), FALSE);
 	EnableWindow(GetDlgItem(hwnd, PB_8), FALSE);
 	EnableWindow(GetDlgItem(hwnd, PB_9), FALSE);
+}
+
+void PlayerTwo(HWND hwnd)
+{
+	int iItr = 0;
+	while(iItr < 10)
+	//for (int iItr = 0; iItr < 10; iItr++)
+	{
+		if (iState[iItr] == -10)
+		{
+			iState[iItr] = 1;
+			switch (iItr)
+			{
+			case 1:
+				SetDlgItemText(hwnd, PB_1, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_1), FALSE);
+				break;
+			case 2:
+				SetDlgItemText(hwnd, PB_2, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_2), FALSE);
+				break;
+			case 3:
+				SetDlgItemText(hwnd, PB_3, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_3), FALSE);
+				break;
+			case 4:
+				SetDlgItemText(hwnd, PB_4, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_4), FALSE);
+				break;
+			case 5:
+				SetDlgItemText(hwnd, PB_5, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_5), FALSE);
+				break;
+			case 6:
+				SetDlgItemText(hwnd, PB_6, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_6), FALSE);
+				break;
+			case 7:
+				SetDlgItemText(hwnd, PB_7, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_7), FALSE);
+				break;
+			case 8:
+				SetDlgItemText(hwnd, PB_8, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_8), FALSE);
+				break;
+			case 9:
+				SetDlgItemText(hwnd, PB_9, TEXT("X"));
+				EnableWindow(GetDlgItem(hwnd, PB_9), FALSE);
+				break;
+			}
+			iItr = 11;
+			//MessageBox(hwnd, TEXT("WHILE LOOP END"), TEXT("INFO"), MB_OK);
+		}
+		iItr++;
+	}
 }

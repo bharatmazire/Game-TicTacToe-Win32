@@ -15,3 +15,6 @@
 #define PB_RESET	12
 
 #define LT_RESULT	13
+
+#define RB_SINGLE	14
+#define RB_DOUBLE	15
